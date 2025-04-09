@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SiPolicy xmlns="urn:schemas-microsoft-com:sipolicy" PolicyType="Base Policy">
+  <VersionEx>1.0.3.0</VersionEx>
+  <PolicyID>{31351756-3F24-4963-8380-4E7602335AAE}</PolicyID>
+  <BasePolicyID>{D2BDA982-CCF6-4344-AC5B-0B44427B6816}</BasePolicyID>
+  <PlatformID>{2E07F7E4-194C-4D20-B7C9-6F44A6C5A234}</PlatformID>
+  <Rules>
+    <Rule>
+      <Option>Enabled:Unsigned System Integrity Policy</Option>
+    </Rule>
+    <Rule>
+      <Option>Enabled:Advanced Boot Options Menu</Option>
+    </Rule>
+    <Rule>
+      <Option>Enabled:UMCI</Option>
+    </Rule>
+    <Rule>
+      <Option>Enabled:Update Policy No Reboot</Option>
+    </Rule>
+    <Rule>
+      <Option>Enabled:Inherit Default Policy</Option>
+    </Rule>
+    <Rule>
+      <Option>Enabled:Revoked Expired As Unsigned</Option>
+    </Rule>
+    <Rule>
+      <Option>Disabled:Script Enforcement</Option>
+    </Rule>
+  </Rules>
+  <!--EKUS-->
+  <EKUs />
+  <!--File Rules-->
+  <FileRules>
+    <Allow ID="ID_ALLOW_A_1" FileName="*" />
+    <Allow ID="ID_ALLOW_A_2" FileName="*" />
+
+    <Allow ID="ID_ALLOW_DRIVER_1" FriendlyName="IntcDAud.sys Hash Sha256" Hash="7E8A4ADCD7F0359C3F17CF6C9DE38D6C6CB8F2B0ECEDD86D9A99B0D517172E3D" />
+    <Allow ID="ID_ALLOW_DRIVER_2" FriendlyName="NETwaw12.sys.sys Hash Sha256" Hash="480E03313C1540BCB3867DC23482FEAEAD8FFFF8E5C9108A9D6BE58A9557F46F" />
+
+    <Allow ID="ID_ALLOW_DRIVER_3" FriendlyName="IntcDAudit.sys Hash Sha256" Hash="7E8A4ADCD7F0359C3F17CF6C9DE38D6C6CB8F2B0ECEDD86D9A99B0D517172234" />
+    <Allow ID="ID_ALLOW_DRIVER_4" FriendlyName="NETwaw1222.sys.sys Hash Sha256" Hash="480E03313C1540BCB3867DC23482FEAEAD8FFFF8E5C9108A9D6BE58A9557F465" />
+  </FileRules>
+  <!--Signers-->
+  <Signers />
+  <!--Driver Signing Scenarios-->
+  <SigningScenarios>
+    <SigningScenario Value="131" ID="ID_SIGNINGSCENARIO_DRIVERS_1" FriendlyName="Auto generated policy on 08-17-2015">
+      <ProductSigners>
+        <FileRulesRef>
+          <FileRuleRef RuleID="ID_ALLOW_A_1" />
+        </FileRulesRef>
+      </ProductSigners>
+    </SigningScenario>
+    <SigningScenario Value="12" ID="ID_SIGNINGSCENARIO_WINDOWS" FriendlyName="Auto generated policy on 08-17-2015">
+      <ProductSigners>
+        <FileRulesRef>
+          <FileRuleRef RuleID="ID_ALLOW_A_2" />
+        </FileRulesRef>
+      </ProductSigners>
+    </SigningScenario>
+  </SigningScenarios>
+  <UpdatePolicySigners />
+  <CiSigners />
+  <HvciOptions>0</HvciOptions>
+  <Settings>
+	<Setting Provider="AllHostIds" Key="AllKeys" ValueName="EnterpriseDefinedClsId">
+	  <Value>
+        <Boolean>true</Boolean>
+      </Value>
+	</Setting>
+    <Setting Provider="PolicyInfo" Key="Information" ValueName="Name">
+      <Value>
+        <String>TK Windows Driver Allow List</String>
+      </Value>
+    </Setting>
+    <Setting Provider="PolicyInfo" Key="Information" ValueName="Id">
+      <Value>
+        <String>022422</String>
+      </Value>
+    </Setting>
+  </Settings>
+</SiPolicy>
