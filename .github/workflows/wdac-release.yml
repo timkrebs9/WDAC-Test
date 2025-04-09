@@ -1,0 +1,45 @@
+name: WDAC Policy Release
+
+on:
+  push:
+    paths:
+      - 'WDAC-Policies/*.xml'
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install WDAC Tools
+      shell: powershell
+      run: |
+        # WDAC-Module aktivieren (Windows Defender Application Control Tools sind standardmäßig in Windows vorhanden)
+        Import-Module ConfigCI -ErrorAction Stop
+
+    - name: Convert XML to BIN
+      shell: powershell
+      run: |
+        $xmlFile = Get-ChildItem -Path .\WDAC-Policies\*.xml | Select-Object -Last 1
+        $binFileName = $xmlFile.BaseName + '.bin'
+        ConvertFrom-CIPolicy -XmlFilePath $xmlFile.FullName -BinaryFilePath ".\$binFileName"
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.run_number }}
+        name: WDAC Policy Release v${{ github.run_number }}
+        body: |
+          ### WDAC Policy Update
+          
+          - XML Policy: `${{ steps.convert.outputs.xmlFile }}`
+          - Converted to binary WDAC format (.bin).
+
+          Released automatically via GitHub Actions.
+        files: |
+          *.bin
